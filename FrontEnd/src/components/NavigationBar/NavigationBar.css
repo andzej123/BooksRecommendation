@@ -1,0 +1,19 @@
+.navigationBar {
+  background-color: #4f60df;
+  padding: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 50px;
+}
+
+.navigationBar a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.active {
+  background-color: #8621218f;
+  padding: 0.2em 0.5em;
+  border-radius: 10px;
+}

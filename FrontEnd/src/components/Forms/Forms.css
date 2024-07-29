@@ -1,0 +1,34 @@
+.form {
+    background-color: #c9c7c7;
+    border: 2px solid #4f60df;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 1em 2em;
+    margin: 3em auto;
+}
+
+.formInput {
+    border: 1px solid #4f60df;
+    border-radius: 10px;
+    padding: 0.5em 0.8em;
+    outline-color: #4f60df;
+}
+
+.submitButton {
+    border: 1px solid #4f60df;
+    background-color:#8621218f;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 0.5em 0.8em;
+    cursor: pointer;
+}
+
+.submitButton:active {
+    transform: translateY(2px);
+}
+
+.error {
+    color: #ff0000;
+    font-size: 0.8rem;
+    margin-bottom: 1.5em;
+}

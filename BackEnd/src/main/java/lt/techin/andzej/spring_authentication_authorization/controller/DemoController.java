@@ -1,0 +1,26 @@
+package lt.techin.andzej.spring_authentication_authorization.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@CrossOrigin("*")
+public class DemoController {
+
+    @GetMapping("/demo")
+    public ResponseEntity<String> demo() {
+        return ResponseEntity.ok("Hello from secured url");
+    }
+
+    @GetMapping("/valid")
+    public ResponseEntity<Boolean> validToken() {
+        return ResponseEntity.ok(true);
+    }
+
+    @GetMapping("admin_only")
+    public ResponseEntity<String> adminOnly() {
+        return ResponseEntity.ok("Hello from admin only url");
+    }
+}
