@@ -7,11 +7,7 @@ import "./Forms.css";
 const LoginForm = () => {
   const [error, setError] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const navigate = useNavigate();
 
@@ -22,7 +18,11 @@ const LoginForm = () => {
       reset();
       navigate("/homepage");
     } catch (error) {
-      setError(error.message);
+      if (error.response.status === 401) {
+        setError("Wrong login or password");
+      } else {
+        setError(error.message);
+      }
     }
   };
 
@@ -41,7 +41,7 @@ const LoginForm = () => {
             {...register("username")}
           />
         </div>
-        <div  className="formInputBody">
+        <div className="formInputBody">
           <input
             className="formInput"
             type="password"
