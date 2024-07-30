@@ -18,10 +18,9 @@ const LoginForm = () => {
       reset();
       navigate("/homepage");
     } catch (error) {
+      setError(error.message);
       if (error.response.status === 401) {
         setError("Wrong login or password");
-      } else {
-        setError(error.message);
       }
     }
   };
