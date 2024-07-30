@@ -6,13 +6,10 @@ import RegistrationPage from "./pages/RegistrationPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import HomePage from "./pages/HomePage";
 import BookPage from "./pages/BookPage";
-import Book from "./components/Book";
+import Book from "./components/Book/Book";
 import { createContext, useState } from "react";
 import CategoryPage from "./pages/CategoryPage";
 import CategoryRegPage from "./pages/CategoryRegPage";
-import NavigationBar from "./components/NavigationBar/NavigationBar";
-import LoginNavigationBar from "./components/NavigationBar/LoginNavigationBar";
-import { checkValidToken } from "./services/token";
 
 export const UpdateContext = createContext();
 export const EditContext = createContext();
@@ -48,24 +45,23 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/categories">
-              <Route
-                index
-                element={
-                  <ProtectedRoute>
-                    <CategoryPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="reg"
-                element={
-                  <ProtectedRoute>
-                    <CategoryRegPage />
-                  </ProtectedRoute>
-                }
-              />
-            </Route>
+            <Route
+              path="/categories"
+              element={
+                <ProtectedRoute>
+                  <CategoryPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/newcategory"
+              element={
+                <ProtectedRoute>
+                  <CategoryRegPage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/bookpage"
               element={

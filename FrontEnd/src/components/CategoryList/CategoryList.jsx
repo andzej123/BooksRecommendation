@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { EditContext, UpdateContext } from "../App";
-import { deleteCategoryById } from "../services/delete";
-import { getAllCategories } from "../services/get";
+import { EditContext, UpdateContext } from "../../App";
+import { deleteCategoryById } from "../../services/delete";
+import { getAllCategories } from "../../services/get";
 import { useNavigate } from "react-router-dom";
+import "./CategoryList.css";
+import ButtonsBar from "../ButtonsBar/ButtonsBar";
 
 const CategoryList = () => {
   const { update, setUpdate } = useContext(UpdateContext);
@@ -30,16 +32,18 @@ const CategoryList = () => {
   const updateHandler = (id) => {
     setEditCategory(true);
     navigate(`/categoryedit/${id}`);
-  }
+  };
 
   return (
     <>
       {categories.map((category) => {
         return (
-          <div className="categoryField" key={category.id}>
+          <div className="singleCategory" key={category.id}>
             {category.name} &nbsp;
-            <button onClick={() => deleteHandler(category.id)}>DELETE</button>
-            <button onClick={() => updateHandler(category.id)}>UPDATE</button>
+            <ButtonsBar>
+              <button className="buttonBarButton" onClick={() => deleteHandler(category.id)}>DELETE</button>
+              <button className="buttonBarButton" onClick={() => updateHandler(category.id)}>UPDATE</button>
+            </ButtonsBar>
           </div>
         );
       })}

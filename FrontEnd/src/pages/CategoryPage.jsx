@@ -1,17 +1,22 @@
 import { useNavigate } from "react-router-dom";
-import CategoryList from "../components/CategoryList";
+import CategoryList from "../components/CategoryList/CategoryList";
+import NavigationBar from "../components/NavigationBar/NavigationBar";
+import ButtonsBar from "../components/ButtonsBar/ButtonsBar";
 
 const CategoryPage = () => {
   const navigate = useNavigate();
 
-  const clickHandler = () => {
-    navigate("/categories/reg");
-  }
-
   return (
     <>
-      <button onClick={clickHandler}>Add Category</button>
-      <button onClick={() => navigate("/homepage")}>Back</button>
+      <NavigationBar />
+      <ButtonsBar>
+        <button
+          className="buttonBarButton"
+          onClick={() => navigate("/newcategory")}
+        >
+          Add Category
+        </button>
+      </ButtonsBar>
       <CategoryList />
     </>
   );

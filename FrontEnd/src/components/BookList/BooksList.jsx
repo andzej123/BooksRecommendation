@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { getAllBooks } from "../services/get";
-import Book from "./Book";
-import { UpdateContext } from "../App";
+import { getAllBooks } from "../../services/get";
+import Book from "../Book/Book";
+import { UpdateContext } from "../../App";
+import "./BookList.css"
 
 const BooksList = () => {
   const [books, setBooks] = useState([]);
@@ -21,7 +22,7 @@ const BooksList = () => {
 
   return (
     <>
-      <div>
+      <div className="bookList">
         {books.map((book) => {
           return <Book key={book.id} book={book} />;
         })}

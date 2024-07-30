@@ -1,11 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import BookForm from "../components/BookForm";
+import BookForm from "../components/Forms/BookForm";
+import NavigationBar from "../components/NavigationBar/NavigationBar";
+import ButtonsBar from "../components/ButtonsBar/ButtonsBar";
 
 const BookPage = () => {
   const navigate = useNavigate();
   return (
     <>
-      <button onClick={() => navigate("/homepage")}>Back</button>
+      <NavigationBar />
+      <ButtonsBar>
+        <button
+          className="buttonBarButton"
+          onClick={() => navigate("/homepage")}
+        >
+          Back
+        </button>
+      </ButtonsBar>
       <BookForm />
     </>
   );

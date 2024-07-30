@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { addBook } from "../services/post";
-import { updateBook } from "../services/update";
-import { getAllCategories, getBookById } from "../services/get";
-import { EditContext } from "../App";
+import { addBook } from "../../services/post";
+import { updateBook } from "../../services/update";
+import { getAllCategories, getBookById } from "../../services/get";
+import { EditContext } from "../../App";
 
 const BookForm = () => {
   const [error, setError] = useState("");
@@ -85,12 +85,13 @@ const BookForm = () => {
   return (
     <>
       <form
-        className="registrationForm"
+        className="form"
         noValidate
         onSubmit={handleSubmit(formSubmitHandler)}
       >
-        <div>
+        <div className="formInputBody">
           <input
+            className="formInput"
             type="text"
             placeholder="Book name"
             {...register("name", {
@@ -100,18 +101,20 @@ const BookForm = () => {
               },
             })}
           />
-          <p className="error">{errors.name?.message}</p>
+          {errors.name ? <p className="error">{errors.name.message}</p> : ""}
         </div>
-        <div>
+        <div className="formInputBody">
           <textarea
+            className="formInput"
             placeholder="Book description"
             {...register("description")}
           />
         </div>
-        <div>
+        <div className="formInputBody">
           <input
             type="text"
             placeholder="ISBN"
+            className="formInput"
             {...register("isbn", {
               required: "This field is mandatory",
               validate: (value) => {
@@ -119,18 +122,20 @@ const BookForm = () => {
               },
             })}
           />
-          <p className="error">{errors.isbn?.message}</p>
+          {errors.isbn ? <p className="error">{errors.isbn.message}</p> : ""}
         </div>
-        <div>
+        <div className="formInputBody">
           <input
             type="text"
+            className="formInput"
             placeholder="Photo link"
             {...register("photoLink")}
           />
         </div>
-        <div>
+        <div className="formInputBody">
           <input
             type="text"
+            className="formInput"
             placeholder="Pages count"
             {...register("pagesCount", {
               required: "This field is mandatory",
@@ -140,15 +145,20 @@ const BookForm = () => {
               },
             })}
           />
-          <p className="error">{errors.pagesCount?.message}</p>
+          {errors.pagesCount ? (
+            <p className="error">{errors.pagesCount.message}</p>
+          ) : (
+            ""
+          )}
         </div>
-        <div>
+        <div className="formInputBody">
           <select
+            className="formInput"
             {...register("category.id", {
-              required: "Please select a category",
+              required: "Please choose an category",
             })}
           >
-            <option value="">--Please choose an category--</option>
+            <option value="">Select category</option>
             {categories.map((category) => {
               return (
                 <option key={category.id} value={category.id}>
@@ -157,7 +167,11 @@ const BookForm = () => {
               );
             })}
           </select>
-          <p className="error">{errors.category?.id.message}</p>
+          {errors.category ? (
+            <p className="error">{errors.category.id.message}</p>
+          ) : (
+            ""
+          )}
         </div>
 
         <input

@@ -10,7 +10,6 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
   } = useForm();
 
@@ -34,23 +33,21 @@ const LoginForm = () => {
         className="form"
         onSubmit={handleSubmit(formSubmitHandler)}
       >
-        <div>
+        <div className="formInputBody">
           <input
             className="formInput"
             type="text"
             placeholder="Username"
             {...register("username")}
           />
-          <p className="errorMessage">{errors.username?.message}</p>
         </div>
-        <div>
+        <div  className="formInputBody">
           <input
             className="formInput"
             type="password"
             placeholder="Password"
             {...register("password")}
           />
-          <p className="errorMessage">{errors.password?.message}</p>
         </div>
 
         <input className="submitButton" type="submit" value="Login" />

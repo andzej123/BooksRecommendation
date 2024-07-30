@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import BooksList from "../components/BooksList";
-import { EditContext } from "../App";
-import { useContext } from "react";
+import BooksList from "../components/BookList/BooksList";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
+import { useContext } from "react";
+import { EditContext } from "../App";
+import ButtonsBar from "../components/ButtonsBar/ButtonsBar";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -13,16 +14,14 @@ const HomePage = () => {
     navigate("/bookpage");
   };
 
-  const navigateHandlerCategory = () => {
-    setEdit(false);
-    navigate("/categories");
-  };
-
   return (
     <>
       <NavigationBar />
-      <button onClick={navigateHandler}>Add New Book</button>
-      <button onClick={navigateHandlerCategory}>Categories</button>
+      <ButtonsBar>
+        <button className="buttonBarButton" onClick={navigateHandler}>
+          Add New Book
+        </button>
+      </ButtonsBar>
       <BooksList />
     </>
   );

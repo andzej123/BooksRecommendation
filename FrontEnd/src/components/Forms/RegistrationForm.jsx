@@ -32,7 +32,7 @@ const RegistrationForm = () => {
         noValidate
         onSubmit={handleSubmit(formSubmitHandler)}
       >
-        <div>
+        <div className="formInputBody">
           <input
             type="text"
             placeholder="First name"
@@ -44,9 +44,9 @@ const RegistrationForm = () => {
               },
             })}
           />
-          <p className="error">{errors.firstName?.message}</p>
+           {errors.firstName ? <p className="error">{errors.firstName.message}</p> : ""}
         </div>
-        <div>
+        <div className="formInputBody">
           <input
             type="text"
             placeholder="Last name"
@@ -58,9 +58,9 @@ const RegistrationForm = () => {
               },
             })}
           />
-          <p className="error">{errors.lastName?.message}</p>
+           {errors.lastName ? <p className="error">{errors.lastName.message}</p> : ""}
         </div>
-        <div>
+        <div className="formInputBody">
           <input
             type="email"
             placeholder="Email"
@@ -76,9 +76,9 @@ const RegistrationForm = () => {
               },
             })}
           />
-          <p className="error">{errors.email?.message}</p>
+           {errors.email ? <p className="error">{errors.email.message}</p> : ""}
         </div>
-        <div>
+        <div className="formInputBody">
           <input
             type="text"
             placeholder="Username"
@@ -90,9 +90,9 @@ const RegistrationForm = () => {
               },
             })}
           />
-          <p className="error">{errors.username?.message}</p>
+           {errors.username ? <p className="error">{errors.username.message}</p> : ""}
         </div>
-        <div>
+        <div className="formInputBody">
           <input
             type="password"
             placeholder="Password"
@@ -108,7 +108,7 @@ const RegistrationForm = () => {
               },
             })}
           />
-          <p className="error">{errors.password?.message}</p>
+           {errors.password ? <p className="error">{errors.password.message}</p> : ""}
         </div>
 
         <input className="submitButton" type="submit" value="Register" />

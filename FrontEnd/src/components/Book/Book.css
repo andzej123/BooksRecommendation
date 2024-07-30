@@ -1,0 +1,22 @@
+.singleBookBody {
+  border: 1px solid black;
+}
+
+.singleBook {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 35% auto;
+  border-bottom: 1px solid black;
+}
+
+.singleBook img {
+  width: 100%;
+}
+
+.singleBookTextSide {
+    padding: 1em;
+    min-height: 359px;
+    overflow: hidden;   
+}
+
+
