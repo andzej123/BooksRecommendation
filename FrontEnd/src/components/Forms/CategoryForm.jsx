@@ -92,7 +92,7 @@ const CategoryForm = () => {
           value={editCategory ? "Update Category" : "Add Category"}
         />
       </form>
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
     </>
   );
 };

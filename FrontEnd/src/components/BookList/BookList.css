@@ -1,6 +1,11 @@
 .bookList {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 0 2em;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: 1em 2em;
   gap: 2em;
 }
+
+.searchBar {
+  text-align: center;
+}
+

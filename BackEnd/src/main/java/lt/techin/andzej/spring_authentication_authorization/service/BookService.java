@@ -67,4 +67,16 @@ public class BookService {
         bookRepository.save(book);
         return book;
     }
+
+    public List<Book> filterBooksByName(String name) {
+        return bookRepository.findBooksByName(name);
+    }
+
+    public List<Book> filterBooksByCategory(Integer id) {
+        return bookRepository.findBooksByCategory(id);
+    }
+
+    public List<Book> filterBooksByNameAndCategory(String name, Integer id) {
+        return bookRepository.findBooksByNameAndCategory(name, id);
+    }
 }

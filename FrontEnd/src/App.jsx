@@ -11,6 +11,7 @@ import { createContext, useState } from "react";
 import CategoryPage from "./pages/CategoryPage";
 import CategoryRegPage from "./pages/CategoryRegPage";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
+import BookDetails from "./components/BookDetails/BookDetails";
 
 export const UpdateContext = createContext();
 export const EditContext = createContext();
@@ -69,6 +70,14 @@ function App() {
                 <ProtectedAdminRoute>
                   <BookPage />
                 </ProtectedAdminRoute>
+              }
+            />
+            <Route
+              path="/bookdetails/:id"
+              element={
+                <ProtectedRoute>
+                  <BookDetails />
+                </ProtectedRoute>
               }
             />
             <Route

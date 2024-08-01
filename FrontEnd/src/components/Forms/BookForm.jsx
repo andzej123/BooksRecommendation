@@ -27,7 +27,7 @@ const BookForm = () => {
       try {
         await updateBook(id, data);
         reset();
-        navigate("/homepage");
+        navigate(`/bookdetails/${id}`);
         setEdit(false);
       } catch (error) {
         setError(error.message);

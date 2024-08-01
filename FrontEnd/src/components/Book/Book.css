@@ -1,12 +1,13 @@
-.singleBookBody {
-  border: 1px solid black;
-}
-
 .singleBook {
+  border: 1px solid black;
   padding: 1em;
   display: grid;
   grid-template-columns: 35% auto;
-  border-bottom: 1px solid black;
+  cursor: pointer;
+}
+
+.singleBook:hover {
+  transform: translateY(2px);
 }
 
 .singleBook img {
@@ -14,8 +15,10 @@
 }
 
 .singleBookTextSide {
-    padding: 1em;
-    min-height: 359px;
-    overflow: hidden;   
+  text-align: center;
 }
 
+.singleBookTextSide p:first-child {
+  font-weight: bold;
+  font-size: 1.2rem;
+}

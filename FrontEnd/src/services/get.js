@@ -51,3 +51,33 @@ export const logout = async () => {
   });
   return response.data;
 };
+
+export const getFilteredBooksByName = async (name) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`${API_URL}/books/search?name=${name}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const getFilteredBooksByCategory = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`${API_URL}/books/searchcategory?id=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const getFilteredBooksByCategoryAndName = async (name, id) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`${API_URL}/books/searchcategoryandname?name=${name}&id=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};

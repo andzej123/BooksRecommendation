@@ -43,4 +43,19 @@ public class BookController {
     public Book updateBook(@PathVariable Integer id, @RequestBody Book book) {
         return bookService.updateBook(id, book);
     }
+
+    @GetMapping("/books/search")
+    public List<Book> getFilteredBooksByName(@RequestParam String name) {
+        return bookService.filterBooksByName(name);
+    }
+
+    @GetMapping("/books/searchcategory")
+    public List<Book> getFilteredBooksByCategory(@RequestParam Integer id) {
+        return bookService.filterBooksByCategory(id);
+    }
+
+    @GetMapping("/books/searchcategoryandname")
+    public List<Book> getFilteredBooksByCategoryAndName(@RequestParam String name, @RequestParam Integer id) {
+        return bookService.filterBooksByNameAndCategory(name, id);
+    }
 }

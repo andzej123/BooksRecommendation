@@ -1,0 +1,30 @@
+.bookDetailsBody {
+    display: grid;
+    grid-template-columns: 40% auto;
+    justify-items: center;
+    padding: 2% 15% 5% 15%;
+    gap: 20px;
+}
+
+.bookDetailsBody-imgSide img {
+    width: 100%;
+    max-width: 300px;
+}
+
+.bookDetailsBody-textSide {
+    display: grid;
+    align-content: center;
+}
+
+.bookDetailsBody-textSide span {
+    font-weight: bold;
+}
+
+.bookDetailsBody-description {
+    grid-column: span 2;
+    padding: 0 5em;
+}
+
+.bookDetailsBody-description h2 {
+    text-align: center;
+}
