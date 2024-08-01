@@ -66,9 +66,9 @@ function App() {
             <Route
               path="/bookpage"
               element={
-                <ProtectedRoute>
+                <ProtectedAdminRoute>
                   <BookPage />
-                </ProtectedRoute>
+                </ProtectedAdminRoute>
               }
             />
             <Route

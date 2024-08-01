@@ -27,6 +27,14 @@ const CategoryList = () => {
       setUpdate((update) => update + 1);
     } catch (error) {
       setError(error.message);
+      if (error.response.status === 401) {
+        setError(
+          "Can't delete this category because it is associated with one or more books"
+        );
+      }
+      setTimeout(() => {
+        setError("");
+      }, 2000);
     }
   };
 

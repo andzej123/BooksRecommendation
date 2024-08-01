@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { checkValidToken } from "../services/token";
 import { getUserRoleFromToken } from "../services/token";
 
@@ -16,7 +16,9 @@ const ProtectedAdminRoute = ({ children }) => {
     const role = await getUserRoleFromToken();
     setRole(role);
   };
-  getRole();
+  useEffect(() => {
+    getRole();
+  }, []);
 
   return (
     <>
