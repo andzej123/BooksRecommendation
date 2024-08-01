@@ -25,7 +25,7 @@ public class Category {
     @Column(name = "name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category")
     @JsonIgnoreProperties("category")
     private List<Book> books;
 }

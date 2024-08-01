@@ -10,6 +10,7 @@ import Book from "./components/Book/Book";
 import { createContext, useState } from "react";
 import CategoryPage from "./pages/CategoryPage";
 import CategoryRegPage from "./pages/CategoryRegPage";
+import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 
 export const UpdateContext = createContext();
 export const EditContext = createContext();
@@ -48,18 +49,18 @@ function App() {
             <Route
               path="/categories"
               element={
-                <ProtectedRoute>
+                <ProtectedAdminRoute>
                   <CategoryPage />
-                </ProtectedRoute>
+                </ProtectedAdminRoute>
               }
             />
 
             <Route
               path="/newcategory"
               element={
-                <ProtectedRoute>
+                <ProtectedAdminRoute>
                   <CategoryRegPage />
-                </ProtectedRoute>
+                </ProtectedAdminRoute>
               }
             />
             <Route
@@ -73,17 +74,17 @@ function App() {
             <Route
               path="/bookedit/:id"
               element={
-                <ProtectedRoute>
+                <ProtectedAdminRoute>
                   <BookPage />
-                </ProtectedRoute>
+                </ProtectedAdminRoute>
               }
             />
             <Route
               path="/categoryedit/:id"
               element={
-                <ProtectedRoute>
+                <ProtectedAdminRoute>
                   <CategoryRegPage />
-                </ProtectedRoute>
+                </ProtectedAdminRoute>
               }
             />
           </Routes>

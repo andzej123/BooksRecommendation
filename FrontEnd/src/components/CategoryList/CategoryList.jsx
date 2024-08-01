@@ -11,6 +11,7 @@ const CategoryList = () => {
   const [categories, setCategories] = useState([]);
   const { setEditCategory } = useContext(EditContext);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const getCategories = async () => {
     const categories = await getAllCategories();
@@ -25,7 +26,7 @@ const CategoryList = () => {
       await deleteCategoryById(id);
       setUpdate((update) => update + 1);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
 
@@ -36,13 +37,24 @@ const CategoryList = () => {
 
   return (
     <>
+      {error && <p className="error">{error}</p>}
       {categories.map((category) => {
         return (
           <div className="singleCategory" key={category.id}>
             {category.name} &nbsp;
             <ButtonsBar>
-              <button className="buttonBarButton" onClick={() => deleteHandler(category.id)}>DELETE</button>
-              <button className="buttonBarButton" onClick={() => updateHandler(category.id)}>UPDATE</button>
+              <button
+                className="buttonBarButton"
+                onClick={() => deleteHandler(category.id)}
+              >
+                DELETE
+              </button>
+              <button
+                className="buttonBarButton"
+                onClick={() => updateHandler(category.id)}
+              >
+                UPDATE
+              </button>
             </ButtonsBar>
           </div>
         );

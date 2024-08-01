@@ -35,7 +35,7 @@ public class Book {
     @Column(name = "pages_count")
     private String pagesCount;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("books")
     private Category category;

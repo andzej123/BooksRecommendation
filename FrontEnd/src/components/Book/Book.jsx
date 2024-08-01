@@ -1,11 +1,24 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { deleteBookById } from "../../services/delete";
 import { EditContext, UpdateContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import "./Book.css";
 import ButtonsBar from "../ButtonsBar/ButtonsBar";
+import { getUserRoleFromToken } from "../../services/token";
 
 const Book = ({ book }) => {
+  const [role, setRole] = useState();
+  const [error, setError] = useState("");
+
+  const getRole = async () => {
+    const role = await getUserRoleFromToken();
+    setRole(role);
+  };
+
+  useEffect(() => {
+    getRole();
+  }, []);
+
   const { setUpdate } = useContext(UpdateContext);
   const navigate = useNavigate();
 
@@ -16,7 +29,7 @@ const Book = ({ book }) => {
       await deleteBookById(book.id);
       setUpdate((update) => update + 1);
     } catch (error) {
-      console.log(error);
+      setError(error.message)
     }
   };
 
@@ -24,8 +37,6 @@ const Book = ({ book }) => {
     setEdit(true);
     navigate(`/bookedit/${book.id}`);
   };
-
-  console.log(book.photoLink);
 
   return (
     <>
@@ -41,11 +52,20 @@ const Book = ({ book }) => {
             <p>Pages count: {book.pagesCount}</p>
             <p>Book genre: {book.category.name}</p>
           </div>
+        {error && <p className="error">{error}</p>}
         </div>
-        <ButtonsBar>
-          <button className="buttonBarButton" onClick={deleteHandler}>DELETE</button>
-          <button className="buttonBarButton" onClick={updateHandler}>UPDATE</button>
-        </ButtonsBar>
+        {role === "ADMIN" ? (
+          <ButtonsBar>
+            <button className="buttonBarButton" onClick={deleteHandler}>
+              DELETE
+            </button>
+            <button className="buttonBarButton" onClick={updateHandler}>
+              UPDATE
+            </button>
+          </ButtonsBar>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
