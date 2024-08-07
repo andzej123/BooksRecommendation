@@ -27,6 +27,7 @@ const NavigationBar = () => {
     <>
       <nav className="navigationBar">
         <NavLink to="/homepage">Homepage</NavLink>
+        <NavLink to="/favoritebooks">Favorite Books</NavLink>
         {role === "ADMIN" ? <NavLink to="/categories">Categories</NavLink> : ""}
         <button className="logoutButton" onClick={logoutHandler}>
           Logout

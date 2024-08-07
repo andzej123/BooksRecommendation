@@ -6,12 +6,12 @@ import RegistrationPage from "./pages/RegistrationPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import HomePage from "./pages/HomePage";
 import BookPage from "./pages/BookPage";
-import Book from "./components/Book/Book";
 import { createContext, useState } from "react";
 import CategoryPage from "./pages/CategoryPage";
 import CategoryRegPage from "./pages/CategoryRegPage";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import BookDetails from "./components/BookDetails/BookDetails";
+import FavoriteBooksPage from "./pages/FavoriteBooksPage";
 
 export const UpdateContext = createContext();
 export const EditContext = createContext();
@@ -31,14 +31,6 @@ function App() {
             <Route index element={<LoginPage />} />
             <Route path="registration" element={<RegistrationPage />} />
             <Route path="*" element={<PageNotFound />} />
-            <Route
-              path="/book/:id"
-              element={
-                <ProtectedRoute>
-                  <Book />
-                </ProtectedRoute>
-              }
-            />
             <Route
               path="/homepage"
               element={
@@ -94,6 +86,14 @@ function App() {
                 <ProtectedAdminRoute>
                   <CategoryRegPage />
                 </ProtectedAdminRoute>
+              }
+            />
+             <Route
+              path="/favoritebooks"
+              element={
+                <ProtectedRoute>
+                  <FavoriteBooksPage />
+                </ProtectedRoute>
               }
             />
           </Routes>

@@ -6,6 +6,9 @@
 }
 
 .searchBar {
-  text-align: center;
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+  margin-top: 1em;
 }
 

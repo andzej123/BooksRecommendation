@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
@@ -44,6 +44,13 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+
+    @ManyToMany
+    @JoinTable(name = "favorite_books",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "book_id")}
+    )
+    private List<Book> favoriteBooks;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

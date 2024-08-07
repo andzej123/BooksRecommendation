@@ -9,6 +9,7 @@ import lt.techin.andzej.spring_authentication_authorization.model.Role;
 import lt.techin.andzej.spring_authentication_authorization.model.User;
 import lt.techin.andzej.spring_authentication_authorization.repository.BookRepository;
 import lt.techin.andzej.spring_authentication_authorization.repository.CategoryRepository;
+import lt.techin.andzej.spring_authentication_authorization.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,13 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository, CategoryRepository categoryRepository) {
+    public BookService(BookRepository bookRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
         this.bookRepository = bookRepository;
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
     }
 
     public Book addBook(Book request) {
@@ -50,6 +53,14 @@ public class BookService {
     }
 
     public void deleteBook(Integer bookId) {
+        Book book = bookRepository.findById(bookId).orElseThrow(
+                () -> new BookNotFoundException("Book with this id not found - " + bookId)
+        );
+        List<User> users = userRepository.findAll();
+        for (User u : users) {
+            List<Book> books = u.getFavoriteBooks();
+            books.remove(book);
+        }
         bookRepository.deleteById(bookId);
     }
 

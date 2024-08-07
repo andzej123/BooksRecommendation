@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getUsernameFromToken } from "./token";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -74,10 +75,41 @@ export const getFilteredBooksByCategory = async (id) => {
 
 export const getFilteredBooksByCategoryAndName = async (name, id) => {
   const token = localStorage.getItem("token");
-  const response = await axios.get(`${API_URL}/books/searchcategoryandname?name=${name}&id=${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await axios.get(
+    `${API_URL}/books/searchcategoryandname?name=${name}&id=${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const checkIfBookIsFavorited = async (bookId) => {
+  const token = localStorage.getItem("token");
+  const username = getUsernameFromToken();
+  const response = await axios.get(
+    `${API_URL}/favoritebooks/${username}/${bookId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const getUsersFavoriteBooks = async () => {
+  const token = localStorage.getItem("token");
+  const username = getUsernameFromToken();
+  const response = await axios.get(
+    `${API_URL}/user/${username}/favoritebooks`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response.data;
 };

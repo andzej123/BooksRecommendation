@@ -1,0 +1,17 @@
+.favoriteBookBody {
+    display: grid;
+    grid-template-columns: 50px auto 60px 145px;
+    column-gap: 20px;
+    align-items: center;
+    justify-items:start;
+    border: 1px solid black;
+    margin: 1em auto;
+    width: 40%;
+    padding: 0.5em;
+    min-height: 91px;    
+}
+
+.favoriteBookBody img {
+    width: 100%;
+    max-width: 50px;
+}

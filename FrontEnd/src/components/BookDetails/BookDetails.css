@@ -14,6 +14,7 @@
 .bookDetailsBody-textSide {
     display: grid;
     align-content: center;
+    justify-items: start;
 }
 
 .bookDetailsBody-textSide span {

@@ -1,15 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getBookById } from "../../services/get";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { checkIfBookIsFavorited, getBookById } from "../../services/get";
 import "./BookDetails.css";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import ButtonsBar from "../ButtonsBar/ButtonsBar";
 import { getUserRoleFromToken } from "../../services/token";
-import { deleteBookById } from "../../services/delete";
+import { deleteBookById, deleteBookFromFavorite } from "../../services/delete";
 import { EditContext, UpdateContext } from "../../App";
+import { addBookToFavorite } from "../../services/post";
 
 const BookDetails = () => {
   const { id } = useParams();
+  const { state } = useLocation();
 
   const { setUpdate } = useContext(UpdateContext);
   const [error, setError] = useState("");
@@ -17,6 +19,23 @@ const BookDetails = () => {
   const { setEdit } = useContext(EditContext);
 
   const [role, setRole] = useState();
+
+  const [favorite, setFavorite] = useState(false);
+
+  const favoriteButtonClickHandler = async () => {
+    if (favorite) {
+      await deleteBookFromFavorite(id);
+    } else {
+      await addBookToFavorite(id);
+    }
+    setFavorite((prevState) => !prevState);
+  };
+
+  const checkFavoriteState = async () => {
+    const response = await checkIfBookIsFavorited(id);
+    setFavorite(response);
+  };
+  checkFavoriteState();
 
   const getRole = async () => {
     const role = await getUserRoleFromToken();
@@ -68,14 +87,19 @@ const BookDetails = () => {
     navigate(`/bookedit/${book.id}`);
   };
 
+  const backButtonHandler = () => {
+    if (state === "favorite") {
+      navigate("/favoritebooks");
+    } else {
+      navigate("/homepage");
+    }
+  };
+
   return (
     <>
       <NavigationBar />
       <ButtonsBar>
-        <button
-          className="buttonBarButton"
-          onClick={() => navigate("/homepage")}
-        >
+        <button className="buttonBarButton" onClick={backButtonHandler}>
           Back
         </button>
         {role === "ADMIN" ? (
@@ -112,6 +136,9 @@ const BookDetails = () => {
           <p>
             <span>Literary Genre:</span> {categoryName}
           </p>
+          <button className="redButton padding-1em" onClick={favoriteButtonClickHandler}>
+            {favorite ? "Remove from favorite" : "Add to favorite"}
+          </button>
         </div>
         <div className="bookDetailsBody-description">
           <h2>{descString}</h2>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getUsernameFromToken } from "./token";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -20,4 +21,14 @@ export const deleteCategoryById = async (id) => {
     },
   });
   return response.data;
+};
+
+export const deleteBookFromFavorite = async (bookId) => {
+  const token = localStorage.getItem("token");
+  const username = getUsernameFromToken();
+  await axios.delete(`${API_URL}/favoritebooks/${username}/${bookId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };

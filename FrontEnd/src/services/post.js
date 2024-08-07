@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getUsernameFromToken } from "./token";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -27,4 +28,18 @@ export const addCategory = async (data) => {
 export const loginUser = async (data) => {
   const response = await axios.post(`${API_URL}/login`, data);
   return response.data;
+};
+
+export const addBookToFavorite = async (bookId) => {
+  const token = localStorage.getItem("token");
+  const username = getUsernameFromToken();
+  await axios.post(
+    `${API_URL}/favoritebooks/${username}/${bookId}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };

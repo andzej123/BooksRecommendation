@@ -9,6 +9,19 @@
 }
 
 .buttonsBarBody {
-    text-align: center;
-    padding: 0.2em;
+  text-align: center;
+  padding: 0.2em;
+}
+
+.redButton {
+  border-radius: 10px;
+  border: 1px solid #4f60df;
+  background-color: #862121bf;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.padding-1em {
+  padding: 0.5em;
 }

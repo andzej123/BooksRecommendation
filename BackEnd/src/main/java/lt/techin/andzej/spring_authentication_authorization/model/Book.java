@@ -1,12 +1,13 @@
 package lt.techin.andzej.spring_authentication_authorization.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -40,4 +41,8 @@ public class Book {
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("books")
     private Category category;
+
+    @ManyToMany(mappedBy = "favoriteBooks")
+    @JsonIgnore
+    private List<User> users;
 }

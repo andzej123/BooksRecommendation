@@ -67,6 +67,11 @@ const BooksList = () => {
     filterBooks();
   }, [categoryField, searchField, books]);
 
+  const resetHandler = () => {
+    setCategoryField(0);
+    setSearchField("");
+  };
+
   return (
     <>
       <div className="searchBar">
@@ -75,10 +80,13 @@ const BooksList = () => {
           className="formInput"
           type="text"
           placeholder="Search"
+          value={searchField}
         />
-      </div>
-      <div>
-        <select onChange={selectHandler}>
+        <select
+          onChange={selectHandler}
+          value={categoryField}
+          className="formInput"
+        >
           <option value="0">Search by category</option>
           {categories.map((category) => {
             return (
@@ -88,6 +96,9 @@ const BooksList = () => {
             );
           })}
         </select>
+        <button onClick={resetHandler} className="redButton">
+          Reset
+        </button>
       </div>
       <div className="bookList">
         {filteredBooks.map((book) => {

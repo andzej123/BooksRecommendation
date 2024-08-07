@@ -27,3 +27,14 @@ export const getUserRoleFromToken = () => {
     return null;
   }
 };
+
+export const getUsernameFromToken = () => {
+  const token = localStorage.getItem("token");
+  try {
+    const decodedToken = jwtDecode(token);
+    return decodedToken.sub;
+  } catch (error) {
+    console.error("Invalid token", error);
+    return null;
+  }
+};
