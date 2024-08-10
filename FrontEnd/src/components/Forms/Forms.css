@@ -2,9 +2,12 @@
   background-color: #c9c7c7;
   border: 2px solid #4f60df;
   border-radius: 10px;
-  width: fit-content;
   padding: 1em 2em;
   margin: 3em auto;
+}
+
+.width-fitContent {
+  width: fit-content;
 }
 
 .formInputBody {
@@ -38,4 +41,24 @@
   font-size: 0.8rem;
   margin-top: 0.7em;
   margin-left: 1em;
+}
+
+.closeButton {
+  font-weight: bold;
+  color: #ff0000;
+  font-size: 1.5rem;
+  text-align: end;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.commentForm {
+  margin: 1em auto;
+  padding: 2em 4em;
+}
+
+.commentFormTextArea {
+  max-width: none;
+  height: 100px;
+  resize: none;
 }

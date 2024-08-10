@@ -3,11 +3,13 @@ import "./Book.css";
 import { useState } from "react";
 import { deleteBookFromFavorite } from "../../services/delete";
 import { addBookToFavorite } from "../../services/post";
-import { checkIfBookIsFavorited } from "../../services/get";
+import { checkIfBookIsFavorited, getCommentsQuantityByBookId } from "../../services/get";
 import Heart from "react-heart";
 
 const Book = ({ book }) => {
   const [active, setActive] = useState(false);
+
+  const [commentsSize, setCommentsSize] = useState(-1);
 
   const navigate = useNavigate();
 
@@ -34,6 +36,17 @@ const Book = ({ book }) => {
   };
   checkFavoriteState();
 
+  const commentsClickHandler = (e) => {
+    e.stopPropagation();
+    navigate(`/comments/${book.id}`);
+  }
+
+  const fetchCommentsSize = async () => {
+    const response = await getCommentsQuantityByBookId(book.id);
+    setCommentsSize(response);
+  }
+  fetchCommentsSize();
+
   return (
     <>
       <div className="singleBook" onClick={clickHandler}>
@@ -53,6 +66,9 @@ const Book = ({ book }) => {
           <div className="heartBody" onClick={heartClickHandler} style={{ width: "1.5rem" }}>
             <Heart isActive={active} onClick={favoriteButtonClickHandler} />
           </div>
+          <p onClick={commentsClickHandler} className="commentsText">
+            Comments({commentsSize})
+          </p>
         </div>
       </div>
     </>

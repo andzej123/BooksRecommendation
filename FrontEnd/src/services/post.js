@@ -43,3 +43,12 @@ export const addBookToFavorite = async (bookId) => {
     }
   );
 };
+
+export const addComment = async (data) => {
+  const token = localStorage.getItem("token");
+  await axios.post(`${API_URL}/comments`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

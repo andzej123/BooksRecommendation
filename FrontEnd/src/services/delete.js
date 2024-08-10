@@ -32,3 +32,12 @@ export const deleteBookFromFavorite = async (bookId) => {
     },
   });
 };
+
+export const deleteCommentById = async (id) => {
+  const token = localStorage.getItem("token");
+  await axios.delete(`${API_URL}/comments/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

@@ -85,7 +85,7 @@ const BookForm = () => {
   return (
     <>
       <form
-        className="form"
+        className="form width-fitContent"
         noValidate
         onSubmit={handleSubmit(formSubmitHandler)}
       >

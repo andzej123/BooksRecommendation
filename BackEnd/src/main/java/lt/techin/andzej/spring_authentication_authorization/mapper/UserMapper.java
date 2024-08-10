@@ -11,7 +11,8 @@ public class UserMapper {
                 user.getLastName(),
                 user.getEmail(),
                 user.getRole(),
-                user.getFavoriteBooks()
+                user.getFavoriteBooks(),
+                user.getComments()
         );
     }
 }

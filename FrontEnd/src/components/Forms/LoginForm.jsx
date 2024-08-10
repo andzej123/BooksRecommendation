@@ -29,7 +29,7 @@ const LoginForm = () => {
     <>
       <form
         noValidate
-        className="form"
+        className="form width-fitContent"
         onSubmit={handleSubmit(formSubmitHandler)}
       >
         <div className="formInputBody">

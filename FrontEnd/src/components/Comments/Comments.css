@@ -1,0 +1,8 @@
+.commentsList {
+  display: grid;
+  justify-content: center;
+}
+
+.commentsList h1 {
+  margin-inline: auto;
+}

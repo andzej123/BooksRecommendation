@@ -2,6 +2,7 @@ package lt.techin.andzej.spring_authentication_authorization.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,4 +46,8 @@ public class Book {
     @ManyToMany(mappedBy = "favoriteBooks")
     @JsonIgnore
     private List<User> users;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Comment> comments;
 }

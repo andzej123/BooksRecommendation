@@ -12,6 +12,7 @@ import CategoryRegPage from "./pages/CategoryRegPage";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import BookDetails from "./components/BookDetails/BookDetails";
 import FavoriteBooksPage from "./pages/FavoriteBooksPage";
+import CommentsPage from "./pages/CommentsPage";
 
 export const UpdateContext = createContext();
 export const EditContext = createContext();
@@ -93,6 +94,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <FavoriteBooksPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/comments/:id"
+              element={
+                <ProtectedRoute>
+                  <CommentsPage />
                 </ProtectedRoute>
               }
             />

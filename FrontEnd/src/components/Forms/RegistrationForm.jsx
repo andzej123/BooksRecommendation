@@ -28,7 +28,7 @@ const RegistrationForm = () => {
   return (
     <>
       <form
-        className="form"
+        className="form width-fitContent"
         noValidate
         onSubmit={handleSubmit(formSubmitHandler)}
       >

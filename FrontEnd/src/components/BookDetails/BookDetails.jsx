@@ -1,6 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { checkIfBookIsFavorited, getBookById } from "../../services/get";
+import {
+  checkIfBookIsFavorited,
+  getBookById,
+  getCommentsQuantityByBookId,
+} from "../../services/get";
 import "./BookDetails.css";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import ButtonsBar from "../ButtonsBar/ButtonsBar";
@@ -8,6 +12,9 @@ import { getUserRoleFromToken } from "../../services/token";
 import { deleteBookById, deleteBookFromFavorite } from "../../services/delete";
 import { EditContext, UpdateContext } from "../../App";
 import { addBookToFavorite } from "../../services/post";
+import BasicModal from "../BasicModal";
+
+export const BookContext = createContext();
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -21,6 +28,12 @@ const BookDetails = () => {
   const [role, setRole] = useState();
 
   const [favorite, setFavorite] = useState(false);
+
+  const navigate = useNavigate();
+
+  const [book, setBook] = useState({});
+
+  const [commentsSize, setCommentsSize] = useState(-1);
 
   const favoriteButtonClickHandler = async () => {
     if (favorite) {
@@ -46,10 +59,6 @@ const BookDetails = () => {
     getRole();
   }, []);
 
-  const navigate = useNavigate();
-
-  const [book, setBook] = useState({});
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await getBookById(id);
@@ -59,6 +68,7 @@ const BookDetails = () => {
   }, [id]);
 
   const {
+    id: bookId,
     name,
     description,
     isbn,
@@ -94,6 +104,20 @@ const BookDetails = () => {
       navigate("/homepage");
     }
   };
+
+  const commentsClickHandler = () => {
+    navigate(`/comments/${book.id}`, { state: "details" });
+  };
+
+  const fetchCommentsSize = async () => {
+    try {
+      const response = await getCommentsQuantityByBookId(id);
+      setCommentsSize(response);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  fetchCommentsSize();
 
   return (
     <>
@@ -136,9 +160,18 @@ const BookDetails = () => {
           <p>
             <span>Literary Genre:</span> {categoryName}
           </p>
-          <button className="redButton padding-1em" onClick={favoriteButtonClickHandler}>
+          <button
+            className="redButton padding-1em"
+            onClick={favoriteButtonClickHandler}
+          >
             {favorite ? "Remove from favorite" : "Add to favorite"}
           </button>
+          <BookContext.Provider value={bookId}>
+            <BasicModal buttonName="Add Comment" />
+          </BookContext.Provider>
+          <p onClick={commentsClickHandler} className="commentsText">
+            Comments({commentsSize})
+          </p>
         </div>
         <div className="bookDetailsBody-description">
           <h2>{descString}</h2>

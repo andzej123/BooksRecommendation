@@ -1,6 +1,8 @@
 package lt.techin.andzej.spring_authentication_authorization.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,6 +53,9 @@ public class User implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "book_id")}
     )
     private List<Book> favoriteBooks;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

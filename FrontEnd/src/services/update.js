@@ -21,3 +21,13 @@ export const updateCategory = async (id, data) => {
   });
   return response.data;
 };
+
+export const updateComment = async (id, data) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.patch(`${API_URL}/comment/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};

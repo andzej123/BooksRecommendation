@@ -29,3 +29,10 @@
 .bookDetailsBody-description h2 {
     text-align: center;
 }
+
+.commentsText {
+    font-style: italic;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1rem;
+}

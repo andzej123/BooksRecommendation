@@ -14,13 +14,21 @@ public class UserResponseDto {
     private String email;
     private Role role;
     private List<Book> favoriteBooks;
+    private List<Comment> comments;
 
-    public UserResponseDto(String username, String firstName, String lastName, String email, Role role, List<Book> favoriteBooks) {
+    public UserResponseDto(String username,
+                           String firstName,
+                           String lastName,
+                           String email,
+                           Role role,
+                           List<Book> favoriteBooks,
+                           List<Comment> comments) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.role = role;
         this.favoriteBooks = favoriteBooks;
+        this.comments = comments;
     }
 }

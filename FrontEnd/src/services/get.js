@@ -113,3 +113,33 @@ export const getUsersFavoriteBooks = async () => {
   );
   return response.data;
 };
+
+export const getCommentsByBookId = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`${API_URL}/comments/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const getCommentsQuantityByBookId = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`${API_URL}/comments/${id}/length`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const getCommentById = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`${API_URL}/comment/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
