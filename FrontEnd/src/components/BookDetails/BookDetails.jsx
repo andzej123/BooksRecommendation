@@ -3,6 +3,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   checkIfBookIsFavorited,
   getBookById,
+  getBookRating,
+  getBookRatingsCount,
   getCommentsQuantityByBookId,
 } from "../../services/get";
 import "./BookDetails.css";
@@ -13,6 +15,8 @@ import { deleteBookById, deleteBookFromFavorite } from "../../services/delete";
 import { EditContext, UpdateContext } from "../../App";
 import { addBookToFavorite } from "../../services/post";
 import BasicModal from "../BasicModal";
+import RatingModal from "../RatingModal";
+import { Rating } from "@mui/material";
 
 export const BookContext = createContext();
 
@@ -34,6 +38,9 @@ const BookDetails = () => {
   const [book, setBook] = useState({});
 
   const [commentsSize, setCommentsSize] = useState(-1);
+
+  const [rating, setRating] = useState(0);
+  const [usersRated, setUsersRated] = useState(0);
 
   const favoriteButtonClickHandler = async () => {
     if (favorite) {
@@ -119,6 +126,18 @@ const BookDetails = () => {
   };
   fetchCommentsSize();
 
+  const fetchRating = async () => {
+    try {
+      const response = await getBookRating(id);
+      const ratingCount = await getBookRatingsCount(id);
+      setRating(response);
+      setUsersRated(ratingCount);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  fetchRating();
+
   return (
     <>
       <NavigationBar />
@@ -168,9 +187,16 @@ const BookDetails = () => {
           </button>
           <BookContext.Provider value={bookId}>
             <BasicModal buttonName="Add Comment" />
+            <RatingModal />
           </BookContext.Provider>
           <p onClick={commentsClickHandler} className="commentsText">
             Comments({commentsSize})
+          </p>
+          <p>
+            <span>Book Rating:</span>
+            <br />
+            <Rating name="read-only" value={rating} readOnly />
+            <span id="usersRated">({usersRated}) users rated</span>
           </p>
         </div>
         <div className="bookDetailsBody-description">

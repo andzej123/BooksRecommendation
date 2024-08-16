@@ -1,12 +1,8 @@
 package lt.techin.andzej.spring_authentication_authorization.service;
 
-import jakarta.annotation.PostConstruct;
 import lt.techin.andzej.spring_authentication_authorization.exceptions.BookNotFoundException;
 import lt.techin.andzej.spring_authentication_authorization.exceptions.CategoryNotFoundException;
-import lt.techin.andzej.spring_authentication_authorization.model.Book;
-import lt.techin.andzej.spring_authentication_authorization.model.Category;
-import lt.techin.andzej.spring_authentication_authorization.model.Role;
-import lt.techin.andzej.spring_authentication_authorization.model.User;
+import lt.techin.andzej.spring_authentication_authorization.model.*;
 import lt.techin.andzej.spring_authentication_authorization.repository.BookRepository;
 import lt.techin.andzej.spring_authentication_authorization.repository.CategoryRepository;
 import lt.techin.andzej.spring_authentication_authorization.repository.UserRepository;

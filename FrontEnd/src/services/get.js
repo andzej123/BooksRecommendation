@@ -143,3 +143,36 @@ export const getCommentById = async (id) => {
   });
   return response.data;
 };
+
+export const getBookRating = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`${API_URL}/ratings/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const checkIfUserAlreadyRankedBook = async (bookId) => {
+  const token = localStorage.getItem("token");
+  const username = getUsernameFromToken();
+  const response = await axios.get(`${API_URL}/ratings/${bookId}/${username}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const getBookRatingsCount = async (bookId) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`${API_URL}/ratings/${bookId}/count`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+

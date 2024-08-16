@@ -52,3 +52,17 @@ export const addComment = async (data) => {
     },
   });
 };
+
+export const rateBook = async (rating, bookId) => {
+  const token = localStorage.getItem("token");
+  const username = getUsernameFromToken();
+  await axios.post(
+    `${API_URL}/ratings/${bookId}/${username}?rating=${rating}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};

@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -56,6 +57,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Rating> ratings;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

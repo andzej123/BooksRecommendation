@@ -3,11 +3,18 @@ import "./Book.css";
 import { useState } from "react";
 import { deleteBookFromFavorite } from "../../services/delete";
 import { addBookToFavorite } from "../../services/post";
-import { checkIfBookIsFavorited, getCommentsQuantityByBookId } from "../../services/get";
+import {
+  checkIfBookIsFavorited,
+  getBookRating,
+  getCommentsQuantityByBookId,
+} from "../../services/get";
 import Heart from "react-heart";
+import { Rating } from "@mui/material";
 
 const Book = ({ book }) => {
   const [active, setActive] = useState(false);
+
+  const [rating, setRating] = useState(0);
 
   const [commentsSize, setCommentsSize] = useState(-1);
 
@@ -39,13 +46,23 @@ const Book = ({ book }) => {
   const commentsClickHandler = (e) => {
     e.stopPropagation();
     navigate(`/comments/${book.id}`);
-  }
+  };
 
   const fetchCommentsSize = async () => {
     const response = await getCommentsQuantityByBookId(book.id);
     setCommentsSize(response);
-  }
+  };
   fetchCommentsSize();
+
+  const fetchRating = async () => {
+    try {
+      const response = await getBookRating(book.id);
+      setRating(response);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  fetchRating();
 
   return (
     <>
@@ -63,12 +80,17 @@ const Book = ({ book }) => {
         <div className="singleBookTextSide">
           <p>{book.name}</p>
           <p>{book.category.name}</p>
-          <div className="heartBody" onClick={heartClickHandler} style={{ width: "1.5rem" }}>
+          <div
+            className="heartBody"
+            onClick={heartClickHandler}
+            style={{ width: "1.5rem" }}
+          >
             <Heart isActive={active} onClick={favoriteButtonClickHandler} />
           </div>
           <p onClick={commentsClickHandler} className="commentsText">
             Comments({commentsSize})
           </p>
+          <Rating name="read-only" value={rating} readOnly />
         </div>
       </div>
     </>
