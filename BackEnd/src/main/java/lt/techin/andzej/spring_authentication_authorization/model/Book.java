@@ -26,7 +26,6 @@ public class Book {
     @Column(name = "name")
     private String name;
 
-    @Lob
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
