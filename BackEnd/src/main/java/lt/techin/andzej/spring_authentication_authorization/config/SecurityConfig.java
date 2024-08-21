@@ -35,16 +35,20 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomAccessDeniedHandler accessDeniedHandler;
     private final CustomLogoutHandler logoutHandler;
+    private final CustomAuthenticationFailureHandler authenticationFailureHandler;
 
     @Autowired
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService,
-                          JwtAuthenticationFilter jwtAuthenticationFilter,
-                          CustomAccessDeniedHandler accessDeniedHandler,
-                          CustomLogoutHandler logoutHandler) {
+    public SecurityConfig(
+            UserDetailsServiceImpl userDetailsService,
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            CustomAccessDeniedHandler accessDeniedHandler,
+            CustomLogoutHandler logoutHandler,
+            CustomAuthenticationFailureHandler authenticationFailureHandler) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.accessDeniedHandler = accessDeniedHandler;
         this.logoutHandler = logoutHandler;
+        this.authenticationFailureHandler = authenticationFailureHandler;
     }
 
     @Bean
@@ -62,7 +66,8 @@ public class SecurityConfig {
                                 .hasAuthority("ADMIN")
                                 .anyRequest()
                                 .authenticated()
-                ).userDetailsService(userDetailsService)
+                ).formLogin(f -> f.failureHandler(authenticationFailureHandler))
+                .userDetailsService(userDetailsService)
                 .exceptionHandling(e -> e.accessDeniedHandler(accessDeniedHandler)
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .sessionManagement(session -> session
