@@ -17,10 +17,10 @@ const LoginForm = () => {
       localStorage.setItem("token", response.token);
       reset();
       navigate("/homepage");
-    } catch (error) {
-      setError(error.message);
-      if (error.response.status === 401) {
-        setError("Wrong login or password");
+    } catch (e) {
+      setError(e.message);
+      if (e.response !== undefined) {
+        setError(e.response.data.message);
       }
     }
   };

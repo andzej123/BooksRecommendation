@@ -35,7 +35,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomAccessDeniedHandler accessDeniedHandler;
     private final CustomLogoutHandler logoutHandler;
-    private final CustomAuthenticationFailureHandler authenticationFailureHandler;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
     public SecurityConfig(
@@ -43,12 +43,12 @@ public class SecurityConfig {
             JwtAuthenticationFilter jwtAuthenticationFilter,
             CustomAccessDeniedHandler accessDeniedHandler,
             CustomLogoutHandler logoutHandler,
-            CustomAuthenticationFailureHandler authenticationFailureHandler) {
+            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.accessDeniedHandler = accessDeniedHandler;
         this.logoutHandler = logoutHandler;
-        this.authenticationFailureHandler = authenticationFailureHandler;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
 
     @Bean
@@ -66,10 +66,10 @@ public class SecurityConfig {
                                 .hasAuthority("ADMIN")
                                 .anyRequest()
                                 .authenticated()
-                ).formLogin(f -> f.failureHandler(authenticationFailureHandler))
+                )
                 .userDetailsService(userDetailsService)
                 .exceptionHandling(e -> e.accessDeniedHandler(accessDeniedHandler)
-                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter,
