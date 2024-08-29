@@ -20,19 +20,6 @@ public class CategoryService {
         this.repository = repository;
     }
 
-    @PostConstruct
-    private void postConstruct() {
-        Category horror = new Category();
-        horror.setName("Horror");
-        Category action = new Category();
-        action.setName("Action");
-        Category comedy = new Category();
-        comedy.setName("Comedy");
-        repository.save(horror);
-        repository.save(action);
-        repository.save(comedy);
-    }
-
     public List<Category> getAllCategories() {
         return repository.findAll();
     }

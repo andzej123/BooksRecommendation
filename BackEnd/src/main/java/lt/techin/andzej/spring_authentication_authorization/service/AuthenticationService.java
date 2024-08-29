@@ -36,15 +36,6 @@ public class AuthenticationService {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostConstruct
-    private void postConstruct() {
-        User user = new User();
-        user.setUsername("admin");
-        user.setPassword(passwordEncoder.encode("admin"));
-        user.setRole(Role.ADMIN);
-        repository.save(user);
-    }
-
     public AuthenticationResponse register(User request) {
         User user = new User();
         user.setFirstName(request.getFirstName());
